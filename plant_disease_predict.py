@@ -65,20 +65,21 @@ from tensorflow.keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropou
 
 # Model
 model = Sequential([
-    Conv2D(16, (3, 3), activation='relu', input_shape=(img_height, img_width, 3)),
-    MaxPooling2D(2, 2),
+    Conv2D(32, (3,3), activation='relu', input_shape=(64,64,3)),
+    MaxPooling2D(2,2),
 
-    Conv2D(32, (3, 3), activation='relu'),
-    MaxPooling2D(2, 2),
+    Conv2D(64, (3,3), activation='relu'),
+    MaxPooling2D(2,2),
 
-    Conv2D(64, (3, 3), activation='relu'),
-    MaxPooling2D(2, 2),
+    Conv2D(128, (3,3), activation='relu'),
+    MaxPooling2D(2,2),
 
     Flatten(),
-    Dense(64, activation='relu'),
+    Dense(128, activation='relu'),
     Dropout(0.5),
-    Dense(train_generator.num_classes, activation='softmax')  # 16 classes
+    Dense(train_generator.num_classes, activation='softmax')
 ])
+
 
 # Compile
 model.compile(optimizer='adam',
@@ -89,7 +90,7 @@ model.compile(optimizer='adam',
 model.summary()
 
 # %%
-EPOCHS = 5
+EPOCHS = 20
 
 history = model.fit(
     train_generator,
@@ -132,7 +133,7 @@ print("✅ Model saved as 'plant_disease_cnn_model.h5'")
 from tensorflow.keras.preprocessing import image 
 import numpy as np
 
-img_path = r"C:\Users\Dell\OneDrive\Pictures\Screenshots\potato early.jpg"
+img_path = r"C:\Users\Dell\OneDrive\Pictures\Screenshots\potato_earlyblight_2.jpg"
 img = image.load_img(img_path, target_size=(64, 64))
 img_array = image.img_to_array(img)/255.0
 img_array = np.expand_dims(img_array, axis=0)  # shape (1, height, width, 3)
