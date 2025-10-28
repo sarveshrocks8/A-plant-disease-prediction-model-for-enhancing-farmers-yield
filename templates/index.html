@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>🌿 Plant Disease Detection</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>🌱 Plant Disease Detection using CNN</h1>
+    <form action="/predict" method="POST" enctype="multipart/form-data">
+      <input type="file" name="file" accept="image/*" required>
+      <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+      <h2>Predicted Class: {{ prediction }}</h2>
+      <img src="{{ img_path }}" alt="Uploaded Image" width="250">
+    {% endif %}
+  </div>
+</body>
+</html>
